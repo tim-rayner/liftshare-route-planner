@@ -1,0 +1,15 @@
+Required: 
+✅ Create React App - Initialize core components 
+❌ Implement Logic For Add Journey Form (geocoding service to get location latitude and longitude based on the origin/destination text entered => store in state )
+❌ Implement Logic For Journey Schedule Form (datetime entry for departure/return => store in state)
+❌ Implement Map => the map should render a blank bap message if no route is found. Once route has an origin location, render a map with marker(s)
+❌ Implement route drawing from origin location to destination
+❌ Plug in both forms into a multi-step form. 
+❌ Render submit button if route details are complete 
+❌ Fake XHR POST with route details as payload
+
+Nice To Have (if you have time)
+❌ Implement address autocomplete in form 
+❌ Implement distance counter below map 
+❌ current location option on origin location in first form step 
+❌ bespoke styling to make UI pop and UX as creative as possible. 
