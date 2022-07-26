@@ -1,12 +1,17 @@
 import mapIcon from '../../assets/media/location.png';
+import { Route } from '../../interfaces/route';
 
-function Map(props: any){
+type Props = {
+    route?: Route
+}   
 
-    if(props.route == undefined){
+function Map({route}: Props){
+
+    if(route?.origin == undefined){
         return (
             <>
-                no route defined 
                 <img src={mapIcon} alt="no route found"/>
+                <p> let's get started by finding your route</p>
             </>
 
         )
@@ -14,6 +19,8 @@ function Map(props: any){
     return (
         <>
          route found... loading map...
+         lng:  {route.origin.coordinates.lng}
+         lat:  {route.origin.coordinates.lat}
         </>
     )
   

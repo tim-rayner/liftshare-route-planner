@@ -1,6 +1,6 @@
 export interface Coordinates {
-    lng: number; 
-    lat: number;
+    lat: number | undefined;
+    lng: number | undefined; 
 }
 
 export interface Location {
@@ -8,9 +8,10 @@ export interface Location {
 }
 
 export interface Route {
-    origin: Location, 
-    destination: Location,
-    departure: Date, 
-    return : Date
+    originText?: string,
+    destinationText?: string,
+    origin?: Location, 
+    destination?: Location,
+    departure?: Date, 
+    return? : Date
 }
-
