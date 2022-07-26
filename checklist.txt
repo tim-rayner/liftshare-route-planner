@@ -11,9 +11,9 @@ Required:
 
 Nice To Have (if you have time): 
 ❌ Implement address autocomplete in form 
-❌ Implement distance counter below map 
+✅ Implement distance counter below map 
 ❌ current location option on origin location in first form step 
-❌ bespoke styling to make UI pop and UX as creative as possible. 
+✅  bespoke styling to make UI pop and UX as creative as possible. 
 ❌ route calculated automatically after destination is entered.  
 
 
