@@ -14,6 +14,7 @@ Nice To Have (if you have time):
 ❌ Implement distance counter below map 
 ❌ current location option on origin location in first form step 
 ❌ bespoke styling to make UI pop and UX as creative as possible. 
+❌ route calculated automatically after destination is entered.  
 
 
 Bugs found during development:
