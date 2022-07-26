@@ -4,7 +4,7 @@ function Confirmation(props: any){
         props.prevStep();
     }
 
-    //fake XHR request to simulate posting the journey to others on liftshare 
+    //fake XHR request to simulate posting the journey to others on liftshare via an api call
     const postJourney = () => {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:8080/route');
