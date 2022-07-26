@@ -1,8 +1,5 @@
-import { access } from 'fs';
-import { resolve } from 'node:path/win32';
-import { useEffect, useState } from 'react';
-import { Card, Container } from 'reactstrap';
-import { promises } from 'stream';
+import { useState } from 'react';
+import { Col, Row } from 'reactstrap';
 import { Coordinates, Route } from '../../../../interfaces/route';
 import '../form.css';
 
@@ -19,24 +16,20 @@ const accessToken = 'pk.eyJ1IjoidGltLXJheW5lciIsImEiOiJja2Z5Z3dkMDIwYWE5MzBtN2I2
 //TODO: Strongly type props 
 function AddJourneyForm(props: any){
 
-    const [routeData, setRouteData] = useState<Route>(props.route);
 
     const [originText, setOriginText] = useState<string>(props.route?.originText);
-    const [originLatitude, setOriginLatitude] = useState<number>(props.route?.origin?.coordinates.lat);
-    const [originLongitude, setOriginLongitude] = useState<number>(props.route?.origin?.coordinates.lng);
-
-
     const [destText, setDestText] = useState<string>(props.route?.destinationText);
-    const [destLatitude, setDestLatitude] = useState<number>(props.route?.destination?.coordinates.lat);
-    const [destLongitude, setDestLongitude] = useState<number>(props.route?.destination?.coordinates.lng);
+    const [originLng, setOriginLng] = useState<number>();
+    const [originLat, setOriginLat] = useState<number>();
 
     const Continue = () => {
-        SaveChanges();
-        props.nextStep();
+        if(originText && destText){
+            SaveChanges();
+            props.nextStep();
+        }
     }
 
     const SaveChanges = async () => {
-        //save changes back to state 
 
         const originCoords: Coordinates = await Geolocate(originText);
         const destCoords: Coordinates = await Geolocate(destText);
@@ -44,7 +37,7 @@ function AddJourneyForm(props: any){
 
         console.log(originCoords);
 
-        const route: Route = {
+        let route: Route = {
             originText: originText,
             destinationText: destText, 
             origin: {
@@ -81,24 +74,36 @@ function AddJourneyForm(props: any){
             .catch(err => {
                 return Promise.reject();
             });
-    }   
+    }  
 
     return (
-        <Container className="form-container">
             <form className='aj-form'>
-                <h3> Add Your Journey </h3>
-                <p> Whether you're looking to Liftshare as a driver or a passenger, listing your journey is the best way to find a match.</p>
-                <br/>
-                <label> Journey Start </label>
-                <input type="text" onChange={(e: any) => setOriginText(e.target.value)} defaultValue={props.route?.originText}/>
-                <br/>
-                <label> Destination</label>
-                <input type="text" onChange={(e: any) => setDestText(e.target.value)} defaultValue={props.route?.destinationText}/>
-                <br/>
-                <input type="checkbox" defaultChecked={true}/> <label> This is a return journey (round trip)</label> 
-                <button onClick={Continue}>Next</button> 
+                <Row>
+                    <Col sm={12}>
+                    <h3> Add Your Journey </h3>
+                    <p> Whether you're looking to Liftshare as a driver or a passenger, listing your journey is the best way to find a match.</p>
+                    </Col>
+                    <Col sm={12}>
+                        <label> Journey Start </label>
+                        <br/>
+                        <input required={true} type="text" onChange={(e: any) => setOriginText(e.target.value)} defaultValue={props.route?.originText}/>
+                        <br/>
+                    </Col>
+                    <Col sm={12}>
+                        <label> Destination</label>
+                        <br/>
+                        <input required={true} type="text" onChange={(e: any) => setDestText(e.target.value)} defaultValue={props.route?.destinationText}/>
+                        <br/>
+                    </Col>
+                    <Col sm={12}>
+                        <input type="checkbox" defaultChecked={true} className="checkbox"/> <label> This is a return journey (round trip)</label> 
+                    </Col>
+                </Row>
+                <div className="button-group">
+                    <button onClick={Continue} className="btn btn-primary next"> Get Started </button>
+                </div>
             </form>
-        </Container>
+
 
     )
 }

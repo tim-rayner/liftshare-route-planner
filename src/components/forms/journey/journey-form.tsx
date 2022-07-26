@@ -1,5 +1,6 @@
-import { useReducer, useState } from "react";
-import { Location, Route } from "../../../interfaces/route";
+import { useState } from "react";
+import { Progress } from "reactstrap";
+import { Route } from "../../../interfaces/route";
 import AddJourneyForm from "./multi-steps/add-journey";
 import Confirmation from "./multi-steps/confirmation";
 import JourneyScheduleForm from "./multi-steps/journey-schedule";
@@ -34,25 +35,39 @@ function JourneyForm({setUserRoute} : Props){
     //implement multi step rendering based on step value inside state 
     switch(step) {
         case 1: 
-            return <AddJourneyForm 
-                        prevStep={() => prevStep()}
-                        nextStep={() => nextStep()}
-                        handleChange = {(route: Route) => handleChange(route)}
-                        route = {route}
-                    />
+            return (
+            <>
+                <AddJourneyForm 
+                    prevStep={() => prevStep()}
+                    nextStep={() => nextStep()}
+                    handleChange = {(route: Route) => handleChange(route)}
+                    route = {route}
+                />
+                <Progress value={0} className="inv"/>
+            </>)
         case 2: 
-            return <JourneyScheduleForm
-                        prevStep={() => prevStep()}
-                        nextStep={() => nextStep()}
-                        handleChange = {(route: Route) => handleChange(route)}
-                        route = {route}
-                    />
+            return (
+                <>
+                    <JourneyScheduleForm
+                            prevStep={() => prevStep()}
+                            nextStep={() => nextStep()}
+                            handleChange = {(route: Route) => handleChange(route)}
+                            route = {route}
+                        />
+                    <Progress value={45}/>
+                </>
+            )
         case 3: 
-            return <Confirmation
+            return (
+                <>
+                    <Confirmation
                         prevStep={() => prevStep()}
                         nextStep={() => nextStep()}
                         route = {route}
                     />
+                    <Progress value={100}/>
+                </>
+            ) 
         default: 
             return <> </>
     }

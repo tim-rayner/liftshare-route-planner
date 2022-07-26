@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Col, Row } from 'reactstrap';
 import { Route } from '../../../../interfaces/route';
 
 // the journey schedule form will gather the following sets of data: 
@@ -45,16 +46,25 @@ function JourneyScheduleForm(props: any){
 
     return(
         <form>
-            {/* TODO: Implement Journey Schedule Form */}
-            <h3> Schedule Your Journey </h3>
-            <label> Departure </label> 
-            <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} defaultValue={props.route?.departure}/>
-            <br/>
-            <label> Return </label> 
-            <input type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} defaultValue={props.route?.return}/>
-            <br/>
-            <button onClick={Back}>Back</button> 
-            <button onClick={Continue}>Next</button> 
+            <Row>
+                <Col sm={12}>
+                    <h3> Schedule Your Journey </h3>
+                    <p> To find a the best fit, please provide us with the times you will be taking this journey</p>
+                </Col>
+                <Col sm={6}>
+                    <label> Departure </label> 
+                    <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} defaultValue={props.route?.departure}/>
+                    <br/>
+                    <label> Return </label> 
+                    <br/>
+                    <input type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} defaultValue={props.route?.return}/>
+                </Col>
+            </Row>
+            <div className="button-group">
+                <button onClick={Back} className="btn btn-primary prev">Back</button> 
+                <button onClick={Continue} className="btn btn-primary next">Next</button> 
+            </div>
+
         </form>
     )
 }

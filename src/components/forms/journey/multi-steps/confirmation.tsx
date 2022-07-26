@@ -13,10 +13,18 @@ function Confirmation(props: any){
 
     return (
         <form onSubmit={() => postJourney()}>
-            Your Journey Takes You From {props.route.originText} to {props.route?.destinationText} on {props.route?.departure} <br/>
-            Share Your Journey? 
-            <button onClick={Back}> Back </button>
-            <button type="submit"> Save </button>
+            <h3> Nearly There! </h3>
+            <p> 
+                Your Journey Takes You From {props.route.originText} to {props.route?.destinationText} {props.route?.departure ? 'on ' + props.route?.departure : 'however, a date has not been specified'} <br/>
+                <br/>
+                Share Your Journey To Find Your Liftshare Partner? 
+            </p>
+
+            <div className="button-group">
+                <button onClick={Back} className="btn btn-primary prev"> Back </button>
+                <button type="submit" className="btn btn-primary next"> Share </button>
+            </div>
+
         </form>
     )
 }

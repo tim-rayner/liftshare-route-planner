@@ -1,6 +1,5 @@
 import { Navbar, NavbarBrand } from "reactstrap";
 
-
 function NavigationBar(){
   return (
     <Navbar
@@ -9,7 +8,7 @@ function NavigationBar(){
       dark
     >
       <NavbarBrand href="/">
-        liftshare
+        Liftshare
       </NavbarBrand>
     </Navbar>
   )

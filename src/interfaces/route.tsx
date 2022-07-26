@@ -16,3 +16,7 @@ export interface Route {
     return? : Date | boolean
     
 }
+export interface Distance {
+    duration?: string, 
+    distance?: string,
+}

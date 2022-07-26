@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Col, Row } from "reactstrap";
 import JourneyForm from "../../components/forms/journey/journey-form";
 import Map from "../../components/map/map";
-import { Route } from "../../interfaces/route";
+import { Distance, Route } from "../../interfaces/route";
 
 //TODO: Store form input data in state, this state can then be parsed to the map component. 
 
@@ -28,19 +28,24 @@ function LandingPage(){
     }
     
     const [userRoute, setUserRoute] = useState<Route>();
+    const [routeDistanceData, setRouteDistanceData] = useState<Distance>();
+
+
 
     return (
         <div>
             <Row>
-                <Col sm={12} md={6}>
+                <Col sm={12} md={5} className="form-panel">
                     {/* TODO: Add Form(s) Here As A Multi-Step Form */}
-                    <JourneyForm
-                        setUserRoute={setUserRoute}
-                    /> 
+                    <div className="multi-form-container">
+                        <JourneyForm
+                            setUserRoute={setUserRoute}
+                        /> 
+                    </div>
                 </Col>
-                <Col sm={12} md={6}>
+                <Col sm={12} md={7} className="map-panel">
                     {/* TODO: Add Map Here */}
-                    <Map route={userRoute}/>
+                    <Map route={userRoute} distanceData={(data: Distance) => setRouteDistanceData(data)}/>
                 </Col>
             </Row>
         </div>

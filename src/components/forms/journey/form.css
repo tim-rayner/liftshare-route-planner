@@ -1,0 +1,92 @@
+form label, input {
+    width: 250px;
+    display: inline-block;
+}
+
+form .checkbox {
+    width: initial;
+    margin: 5% 2px;
+}
+
+.multi-form-container {
+    width: 95%;
+    margin: 15% auto;
+    height: 450px;
+    position: relative;
+}
+
+.progress {
+    position: absolute; 
+    bottom: 0;
+    left:0;
+    right:0;
+}
+
+.inv {
+    opacity: 0;
+}
+
+.button-group {
+    padding-top: 5%;
+}
+
+.button-group button {
+    margin: 5px;
+    padding: 10px 100px;
+}
+
+.button-group .prev {
+    text-align: center;
+    width: 100%;
+}
+
+.button-group .next {
+    text-align: center;
+    width: 100%;
+}
+
+.multi-form-container .form {
+    height: 400px !important;
+}
+
+@media (min-width:1281px) { 
+    /* laptops and desktops */
+
+    .multi-form-container {
+        height: 400px;
+    }
+
+    form label, input {
+        width: 350px;
+        display: inline-block;
+    }
+
+    .button-group {
+        position: absolute; 
+        bottom: 25px; 
+        left:0;
+        right:0;
+        float: left;
+    }
+    
+    .button-group button {
+        margin: 5px;
+        padding: 10px 100px;
+    }
+    
+    .button-group .prev {
+        text-align: left;
+        float:left;
+        width: initial;
+    }
+    
+    .button-group .next {
+        float:right;
+        text-align: right;
+        width: initial;
+    }
+    
+    .multi-form-container .form {
+        height: 400px !important;
+    }
+}
