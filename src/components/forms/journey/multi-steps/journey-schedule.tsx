@@ -47,6 +47,7 @@ function JourneyScheduleForm(props: any){
     return(
         <form>
             {/* TODO: Implement Journey Schedule Form */}
+            <h3> Schedule Your Journey </h3>
             <label> Departure </label> 
             <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} value={props.route?.departure}/>
             <br/>

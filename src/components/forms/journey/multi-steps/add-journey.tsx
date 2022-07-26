@@ -1,5 +1,8 @@
+import { access } from 'fs';
+import { resolve } from 'node:path/win32';
 import { useEffect, useState } from 'react';
-import { Route } from '../../../../interfaces/route';
+import { promises } from 'stream';
+import { Coordinates, Route } from '../../../../interfaces/route';
 import '../form.css';
 
 // the add journey form will gather the following sets of data: 
@@ -10,7 +13,7 @@ import '../form.css';
 // Journey Destination Latitude (hidden)
 // Journey Destination Longitude (hidden)
 
-
+const accessToken = 'pk.eyJ1IjoidGltLXJheW5lciIsImEiOiJja2Z5Z3dkMDIwYWE5MzBtN2I2ZnJoYmoyIn0.wC13_nTQuaDewW9q0IB__w'
 
 //TODO: Strongly type props 
 function AddJourneyForm(props: any){
@@ -31,21 +34,28 @@ function AddJourneyForm(props: any){
         props.nextStep();
     }
 
-    const SaveChanges = () => {
+    const SaveChanges = async () => {
         //save changes back to state 
+
+        const originCoords: Coordinates = await Geolocate(originText);
+        const destCoords: Coordinates = await Geolocate(destText);
+
+
+        console.log(originCoords);
+
         const route: Route = {
             originText: originText,
             destinationText: destText, 
             origin: {
                 coordinates: {
-                    lat: originLatitude, 
-                    lng: originLongitude
+                    lat: originCoords.lat, 
+                    lng: originCoords.lng,
                 }
             },
             destination: {
                 coordinates: {
-                    lat: destLatitude, 
-                    lng: destLongitude
+                    lat: destCoords.lat, 
+                    lng: destCoords.lng
                 }
             },
             departure: props.route?.departure, 
@@ -55,6 +65,23 @@ function AddJourneyForm(props: any){
         props.handleChange(route);
     }
 
+    const Geolocate = (address: string) : Promise<Coordinates> => {
+     return fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?proximity=ip&types=place%2Cpostcode%2Caddress&access_token=' + accessToken)
+            .then((response) => response.json())
+            .then(res => {
+                
+                const coords: Coordinates = {
+                    lat: res.features[0].center[1],
+                    lng: res.features[0].center[0]
+                 }
+                console.log(coords);
+                return Promise.resolve(coords);
+            })
+            .catch(err => {
+                return Promise.reject();
+            });
+    }   
+
     //for testing purposes 
     useEffect(() => {
         
@@ -62,7 +89,8 @@ function AddJourneyForm(props: any){
 
     return (
         <form>
-            add journey 
+            <h3> Add Your Journey </h3>
+
             <br/>
             <label> Journey Start </label>
             <input type="text" onChange={(e: any) => setOriginText(e.target.value)} value={props.route?.originText}/>
