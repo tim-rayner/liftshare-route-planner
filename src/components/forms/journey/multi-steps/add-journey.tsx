@@ -1,6 +1,7 @@
 import { access } from 'fs';
 import { resolve } from 'node:path/win32';
 import { useEffect, useState } from 'react';
+import { Card, Container } from 'reactstrap';
 import { promises } from 'stream';
 import { Coordinates, Route } from '../../../../interfaces/route';
 import '../form.css';
@@ -82,24 +83,23 @@ function AddJourneyForm(props: any){
             });
     }   
 
-    //for testing purposes 
-    useEffect(() => {
-        
-    }, [])
-
     return (
-        <form>
-            <h3> Add Your Journey </h3>
+        <Container className="form-container">
+            <form className='aj-form'>
+                <h3> Add Your Journey </h3>
+                <p> Whether you're looking to Liftshare as a driver or a passenger, listing your journey is the best way to find a match.</p>
+                <br/>
+                <label> Journey Start </label>
+                <input type="text" onChange={(e: any) => setOriginText(e.target.value)} defaultValue={props.route?.originText}/>
+                <br/>
+                <label> Destination</label>
+                <input type="text" onChange={(e: any) => setDestText(e.target.value)} defaultValue={props.route?.destinationText}/>
+                <br/>
+                <input type="checkbox" defaultChecked={true}/> <label> This is a return journey (round trip)</label> 
+                <button onClick={Continue}>Next</button> 
+            </form>
+        </Container>
 
-            <br/>
-            <label> Journey Start </label>
-            <input type="text" onChange={(e: any) => setOriginText(e.target.value)} value={props.route?.originText}/>
-            <br/>
-            <label> Destination</label>
-            <input type="text" onChange={(e: any) => setDestText(e.target.value)} value={props.route?.destinationText}/>
-            <br/>
-            <button onClick={Continue}>Next</button> 
-        </form>
     )
 }
 

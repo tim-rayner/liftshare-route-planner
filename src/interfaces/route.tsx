@@ -13,5 +13,6 @@ export interface Route {
     origin?: Location, 
     destination?: Location,
     departure?: Date, 
-    return? : Date
+    return? : Date | boolean
+    
 }

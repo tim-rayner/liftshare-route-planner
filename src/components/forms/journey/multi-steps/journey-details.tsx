@@ -1,5 +1,3 @@
-import '../form.css';
-
 function JourneyDetailsForm(){
     return(
         <>

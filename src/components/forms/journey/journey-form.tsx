@@ -54,8 +54,7 @@ function JourneyForm({setUserRoute} : Props){
                         route = {route}
                     />
         default: 
-        //TODO: safeproof.
-            return <> {step}</>
+            return <> </>
     }
 
 }

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Route } from '../../../../interfaces/route';
-import '../form.css';
 
 // the journey schedule form will gather the following sets of data: 
 // Departure Date (datetime)
@@ -49,10 +48,10 @@ function JourneyScheduleForm(props: any){
             {/* TODO: Implement Journey Schedule Form */}
             <h3> Schedule Your Journey </h3>
             <label> Departure </label> 
-            <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} value={props.route?.departure}/>
+            <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} defaultValue={props.route?.departure}/>
             <br/>
             <label> Return </label> 
-            <input type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} value={props.route?.return}/>
+            <input type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} defaultValue={props.route?.return}/>
             <br/>
             <button onClick={Back}>Back</button> 
             <button onClick={Continue}>Next</button> 
