@@ -9,8 +9,12 @@ Required:
 ✅ Render submit button if route details are complete 
 ❌ Fake XHR POST with route details as payload
 
-Nice To Have (if you have time)
+Nice To Have (if you have time): 
 ❌ Implement address autocomplete in form 
 ❌ Implement distance counter below map 
 ❌ current location option on origin location in first form step 
 ❌ bespoke styling to make UI pop and UX as creative as possible. 
+
+
+Bugs found during development:
+👾 Origin / Destination and Departure / return time cannot be updated once returning back through the form. 
