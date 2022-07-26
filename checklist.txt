@@ -18,5 +18,5 @@ Nice To Have (if you have time):
 
 Bugs found during development:
 👾 Origin / Destination and Departure / return time cannot be updated once returning back through the form. 
-👾 map markers are extremely small - make clearer. 
-👾 zoom level should depend on location of markers on map 
+✅ map markers are extremely small - make clearer. 
+✅ zoom level should depend on location of markers on map 
