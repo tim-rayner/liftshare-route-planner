@@ -39,34 +39,49 @@ function Map({route}: Props){
         lng: route.origin.coordinates.lng ? route.origin.coordinates.lng : -122.08427
     }
 
+    
+    const apiIsLoaded = (map : any, maps: any) => {
+        //@ts-ignore
+        const directionsService = new google.maps.DirectionsService();
+        //@ts-ignore
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+        const origin = { lat: 40.756795, lng: -73.954298 };
+        const destination = { lat: 41.756795, lng: -78.954298 };
+  
+        directionsService.route(
+          {
+            origin: route.origin?.coordinates,
+            destination: route.destination?.coordinates,
+            //@ts-ignore
+            travelMode: google.maps.TravelMode.DRIVING
+          },
+          (result: any, status: any) => {
+            //@ts-ignore
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsRenderer.setDirections(result);
+            } else {
+              console.error(`error fetching directions ${result}`);
+            }
+          }
+        );
+    };
+
+
     return (
         <>
-         <div className="map">
-
-            <div className="google-map">
-              <GoogleMapReact
-                bootstrapURLKeys={{ key: googleApiKey }}
-                defaultCenter={location}
-                defaultZoom={zoomLevel}
-              >
-                {/* Add Map Marker For Origin Location */}
-                <MapMarker
-                    lat={route.origin.coordinates.lat}
-                    lng={route.origin.coordinates.lng}
-                    text={route.originText}
-                />
-                {/* Add Map Marker For Destination Location */}
-                <MapMarker
-                    lat={route.destination?.coordinates.lat}
-                    lng={route.destination?.coordinates.lng}
-                    text={route.destinationText}
-                />
-              </GoogleMapReact>
+            <div className="map">
+                <div className="google-map">
+                  <GoogleMapReact
+                    bootstrapURLKeys={{ key: googleApiKey }}
+                    defaultCenter={location}
+                    defaultZoom={zoomLevel}
+                    yesIWantToUseGoogleMapApiInternals
+                    onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
+                  >
+                  </GoogleMapReact>
+                </div>
             </div>
-        </div>
-         lat:  {route.origin.coordinates.lat}
-         <br/>
-         lng:  {route.origin.coordinates.lng}
         </>
     )
   
