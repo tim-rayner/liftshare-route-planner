@@ -26,7 +26,6 @@ function JourneyForm({setUserRoute} : Props){
     }
 
     const handleChange = (route: Route) => {
-        console.log(route);
         setRoute(route);
         setUserRoute(route);
     }
@@ -36,15 +35,15 @@ function JourneyForm({setUserRoute} : Props){
     switch(step) {
         case 1: 
             return (
-            <>
-                <AddJourneyForm 
-                    prevStep={() => prevStep()}
-                    nextStep={() => nextStep()}
-                    handleChange = {(route: Route) => handleChange(route)}
-                    route = {route}
-                />
-                <Progress value={0} className="inv"/>
-            </>)
+                <>
+                    <AddJourneyForm 
+                        nextStep={() => nextStep()}
+                        handleChange = {(route: Route) => handleChange(route)}
+                        route={route!}
+                    />
+                    <Progress value={0} className="inv"/>
+                </>
+            )
         case 2: 
             return (
                 <>

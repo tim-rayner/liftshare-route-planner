@@ -13,19 +13,21 @@ import '../form.css';
 
 const accessToken = 'pk.eyJ1IjoidGltLXJheW5lciIsImEiOiJja2Z5Z3dkMDIwYWE5MzBtN2I2ZnJoYmoyIn0.wC13_nTQuaDewW9q0IB__w'
 
-//TODO: Strongly type props 
-function AddJourneyForm(props: any){
+type Props = {
+    nextStep: Function, 
+    handleChange: Function, 
+    route: Route
+}
+function AddJourneyForm({nextStep, handleChange, route}: Props) {
 
 
-    const [originText, setOriginText] = useState<string>(props.route?.originText);
-    const [destText, setDestText] = useState<string>(props.route?.destinationText);
-    const [originLng, setOriginLng] = useState<number>();
-    const [originLat, setOriginLat] = useState<number>();
+    const [originText, setOriginText] = useState<string>(route?.originText!);
+    const [destText, setDestText] = useState<string>(route?.destinationText!);
 
     const Continue = () => {
         if(originText && destText){
             SaveChanges();
-            props.nextStep();
+            nextStep();
         }
     }
 
@@ -34,10 +36,7 @@ function AddJourneyForm(props: any){
         const originCoords: Coordinates = await Geolocate(originText);
         const destCoords: Coordinates = await Geolocate(destText);
 
-
-        console.log(originCoords);
-
-        let route: Route = {
+        let newRoute: Route = {
             originText: originText,
             destinationText: destText, 
             origin: {
@@ -52,11 +51,11 @@ function AddJourneyForm(props: any){
                     lng: destCoords.lng
                 }
             },
-            departure: props.route?.departure, 
-            return: props.route?.return,
+            departure: route?.departure, 
+            return: route?.return,
         }
 
-        props.handleChange(route);
+        handleChange(newRoute);
     }
 
     const Geolocate = (address: string) : Promise<Coordinates> => {
@@ -68,7 +67,6 @@ function AddJourneyForm(props: any){
                     lat: res.features[0].center[1],
                     lng: res.features[0].center[0]
                  }
-                console.log(coords);
                 return Promise.resolve(coords);
             })
             .catch(err => {
@@ -86,13 +84,13 @@ function AddJourneyForm(props: any){
                     <Col sm={12}>
                         <label> Journey Start </label>
                         <br/>
-                        <input required={true} type="text" onChange={(e: any) => setOriginText(e.target.value)} defaultValue={props.route?.originText}/>
+                        <input required={true} type="text" onChange={(e: any) => setOriginText(e.target.value)} defaultValue={route?.originText}/>
                         <br/>
                     </Col>
                     <Col sm={12}>
                         <label> Destination</label>
                         <br/>
-                        <input required={true} type="text" onChange={(e: any) => setDestText(e.target.value)} defaultValue={props.route?.destinationText}/>
+                        <input required={true} type="text" onChange={(e: any) => setDestText(e.target.value)} defaultValue={route?.destinationText}/>
                         <br/>
                     </Col>
                     <Col sm={12}>

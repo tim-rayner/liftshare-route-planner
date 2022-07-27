@@ -8,27 +8,8 @@ import { Distance, Route } from "../../interfaces/route";
 // third party state management solutions, to keep the code as easy to understand and interpret as possible.
 function LandingPage(){
 
-    //hard coded initial route data for testing purposes
-    const initialRoute : Route = {
-        origin: {
-            coordinates: {
-                lat: 52.83423590788864,
-                lng: 0.850835918025966,
-            
-            }
-        },
-        destination: {
-            coordinates: {
-                lat: 52.63102626665915,
-                lng: 1.2930057892011253,             
-            }
-        }
-    }
-    
     const [userRoute, setUserRoute] = useState<Route>();
     const [routeDistanceData, setRouteDistanceData] = useState<Distance>();
-
-
 
     return (
         <div>

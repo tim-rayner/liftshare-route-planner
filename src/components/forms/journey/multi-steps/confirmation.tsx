@@ -16,7 +16,7 @@ function Confirmation(props: any){
         <form onSubmit={() => postJourney()}>
             <h3> Nearly There! </h3>
             <p> 
-                Your Journey Takes You From {props.route.originText} to {props.route?.destinationText} {props.route?.departure ? 'on ' + props.route?.departure : 'however a date has not yet been specified.'} <br/>
+                Your Journey Takes You From {props.route.originText} to {props.route?.destinationText} {props.route?.departure ? 'at ' + props.route?.departure : 'however a date has not yet been specified.'} <br/>
                 <br/>
                 Share your journey and find your Liftshare partner today. 
             </p>

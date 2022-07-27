@@ -11,6 +11,8 @@ type Props = {
     distanceData: Function
 }   
 
+
+// typescript ignore flags are used within the Map component to ignore type errors as the google location api didn't seem to support react/typescript 
 function Map({route}: Props){
 
     const [distance, setDistance] = useState<string>();
@@ -65,7 +67,6 @@ function Map({route}: Props){
       (result: any, status: any) => {
         //@ts-ignore
         if (status === google.maps.DirectionsStatus.OK) {
-            console.log(result)
           directionsRenderer.setDirections(result);
           setDistance(result.routes[0].legs[0].distance.text);
           setDuration(result.routes[0].legs[0].duration.text);

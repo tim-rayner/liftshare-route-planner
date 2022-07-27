@@ -53,11 +53,11 @@ function JourneyScheduleForm(props: any){
                 </Col>
                 <Col sm={6}>
                     <label> Departure </label> 
-                    <input type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} defaultValue={props.route?.departure}/>
+                    <input min={new Date().toISOString().slice(0, -8)} type="datetime-local" onChange={(e: any) => setDepartureTime(e.target.value)} defaultValue={props.route?.departure}/>
                     <br/>
                     <label> Return </label> 
                     <br/>
-                    <input type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} defaultValue={props.route?.return}/>
+                    <input min={new Date().toISOString().slice(0, -8)} type="datetime-local" onChange={(e: any) => setReturnTime(e.target.value)} defaultValue={props.route?.return}/>
                 </Col>
             </Row>
             <div className="button-group">
